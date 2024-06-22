@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -40,6 +39,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'super-admin' => [
+            'driver' => 'session',
+            'provider' => 'super-admins',
+        ],
     ],
 
     /*
@@ -60,6 +67,14 @@ return [
     */
 
     'providers' => [
+        'super-admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SuperAdmin::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
@@ -111,5 +126,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

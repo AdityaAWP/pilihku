@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+require __DIR__ . '/web/super-admin.php';
+
+// Route::get('/', function () {
+//     return view('index');
+// });
