@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__ . '/web/super-admin.php';
+require __DIR__ . '/web/admin.php';
+
+Route::get('/', function () {
+    dd('Pilihku');
+})->name('landing-page');
 
 // Route::get('/', function () {
 //     return view('index');

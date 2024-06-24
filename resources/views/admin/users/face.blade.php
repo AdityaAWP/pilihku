@@ -1,0 +1,134 @@
+@extends('layouts.admin')
+@section('content')
+    @push('style')
+        <style>
+            canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%; 
+                height: 100%;
+            }
+        </style>
+    @endpush
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="p-4">
+                    <div class="form-group">
+                        <label for="name" class="float-left">Nama</label>
+                        <input type="text" class="form-control" value="{{ $user->name }}" disabled id="name">
+                    </div>
+                    <input type="hidden" name="username" id="username" value="{{ $user->username }}">
+                    <video id="video" autoplay class="col-lg-12 col-md-12 col-sm-12 mx-auto"></video>
+                    <br>
+                    <center>
+
+                        <button id="capture" class="btn btn-primary mt-4">Capture Image</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('script')
+        <script src="{{ asset('/face/dist/face-api.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let video = document.getElementById("video");
+            let canvas = document.body.appendChild(document.createElement("canvas"));
+            let ctx = canvas.getContext("2d");
+            let displaySize;
+
+            let width = 800;
+            let height = 600;
+
+            const startSteam = () => {
+                navigator.mediaDevices.getUserMedia({
+                    video: {facingMode: "user", width, height},
+                    audio : false
+                }).then((steam) => {video.srcObject = steam});
+            }
+
+            console.log(faceapi.nets);
+            Promise.all([
+                faceapi.nets.ageGenderNet.loadFromUri("{{ asset('/face/weights') }}"),
+                faceapi.nets.ssdMobilenetv1.loadFromUri("{{ asset('/face/weights') }}"),
+                faceapi.nets.tinyFaceDetector.loadFromUri("{{ asset('/face/weights') }}"),
+                faceapi.nets.faceLandmark68Net.loadFromUri("{{ asset('/face/weights') }}"),
+                faceapi.nets.faceRecognitionNet.loadFromUri("{{ asset('/face/weights') }}"),
+                faceapi.nets.faceExpressionNet.loadFromUri("{{ asset('/face/weights') }}")
+            ]).then(startSteam);
+
+            $(document).ready(async function(){
+                const descriptions = [];
+                $("#capture").click(async function(){
+                    var username = $('#username').val();
+                    const label = username;
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    var video = document.getElementById('video');
+                    context.drawImage(video, 0, 0, 800, 600);
+                    var capURL = canvas.toDataURL('image/png');
+                    var canvas2 = document.createElement('canvas');
+                    canvas2.width = 800;
+                    canvas2.height = 600;
+                    var ctx = canvas2.getContext('2d');
+                    ctx.drawImage(video, 0, 0, 800, 600);
+                    var new_image_url = canvas2.toDataURL();
+                    var img = document.createElement('img');
+                    img.src = new_image_url;
+
+                    const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+                    console.log(detections);
+                    if( detections != null){
+                        document.body.style.cursor='wait';
+
+                        descriptions.push(detections.descriptor);
+                        var descrip = descriptions;
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type : 'POST',
+                            url : "{{ route('admin.users.face-recognition.ajax-photo', ['organizationSlug' => request()->organization->slug, 'user' => $user->id]) }}",
+                            data :  {image: img.src ,path: username},
+                            cache : false,
+                            success: function(msg){
+                                console.log(msg);
+                                document.body.style.cursor='default';
+                            },
+                            error: function(data){
+                                console.log('error:' ,data);
+                                document.body.style.cursor='default';
+                            }
+                        })
+                        var postData = new faceapi.LabeledFaceDescriptors(label, descrip);
+                        $.ajax({
+                            type : 'POST',
+                            url : "{{ route('admin.users.face-recognition.ajax-descrip', ['organizationSlug' => request()->organization->slug, 'user' => $user->id]) }}",
+                            data :  { myData: JSON.stringify(postData) },
+                            datatype : 'json',
+                            cache : false,
+                            success: function(msg){
+                                document.body.style.cursor='default';
+                                Swal.fire('Berhasil Daftar Wajah!', '', 'success');
+                                setInterval(function() {
+                                    window.location.href = "{{ route('admin.users.index', ['organizationSlug' => request()->organization->slug, 'user' => $user->id]) }}";
+                                }, 2000);
+                            },
+                            error: function(data){
+                                document.body.style.cursor='default';
+                                console.log('error:' ,data);
+                            }
+                        })
+                    }
+                    else {
+                        Swal.fire('Wajah tidak ditemukan', '', 'error');
+                    }
+                });
+            });
+        </script>
+    @endpush
+@endsection
