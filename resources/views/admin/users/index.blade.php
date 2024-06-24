@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-md-6 p-0">                    
                         <a href="{{ route('admin.users.create', request()->organization->slug) }}" class="btn btn-primary btn-sm ms-2">+ Tambah</a>
-                        <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal"><i class="fa fa-table mr-2"></i> Import</button>
+                        {{-- <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal"><i class="fa fa-table mr-2"></i> Import</button> --}}
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
