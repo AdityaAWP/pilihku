@@ -58,7 +58,7 @@ class AdminController extends Controller
         $rules = [
             'name' => 'required',
             'username' => 'required|unique:admins,username,'.$id,
-            'password' => 'min:8',
+            'password' => 'nullable|min:8',
             'organization_id' => 'required|exists:organizations,id'
         ];
 
