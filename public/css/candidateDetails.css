@@ -1,0 +1,53 @@
+.title {
+    margin-top: 150px;
+    max-width: 40%;
+}
+
+.details-wrapper {
+    margin-top: 100px;
+}
+.details-wrapper .img-wrapper {
+    background-color: #D9D9D9;
+    width: 38%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.details-background-box {
+    /* background-color: #f8f9fa; */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.details-background-box h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.background-box p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.modal-body p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.issue-candidate-wrapper{
+    margin-top: 10em;
+    margin-bottom: 10em;
+}
+.issue-candidate-wrapper .row{
+    background-color: #94BBD1;
+    border-radius: 10px;
+}
+.issue-candidate-wrapper h4{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.issue-candidate-wrapper .btn{
+    padding: 10px 50px;
+    margin-bottom: 30px;
+}

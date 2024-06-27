@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/web/super-admin.php';
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+// routes/web.php
+
+Route::get('/', function () {
+    return view('index');
+})->name('home');
+Route::get('/login', function () {
+    return view('pages.login');
+})->name('login');
+
+Route::get('/candidate', function () {
+    return view('pages.candidate');
+})->name('candidate');
+Route::get('/candidate/details', function () {
+    return view('pages.candidateDetails');
+})->name('candidateDetails');
+Route::get('/candidate/details/issue', function () {
+    return view('pages.issue');
+})->name('issues');
