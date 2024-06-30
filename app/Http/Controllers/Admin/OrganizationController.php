@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.organizations.edit');
+        $organization = $request->organization;
+
+        return view('admin.organizations.edit', compact('organization'));
     }
 
     public function update(Request $request)

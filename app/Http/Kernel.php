@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'organization.exists' => \App\Http\Middleware\OrganizationExists::class,
+        'voting_session.exists' => \App\Http\Middleware\VotingSessionExists::class,
     ];
 
     /**
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewarePriority = [
         \App\Http\Middleware\OrganizationExists::class,
-        \App\Http\Middleware\Authenticate::class
+        \App\Http\Middleware\Authenticate::class,
+        \App\Http\Middleware\VotingSessionExists::class
     ];
 }
