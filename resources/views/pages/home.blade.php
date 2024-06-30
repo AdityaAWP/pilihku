@@ -3,193 +3,118 @@
 @section('content')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
-
-<div style="display: flex; flex-direction: column; min-height: 100vh; position: relative;">
+<div class="d-flex flex-column min-vh-100 position-relative">
     @include('components.header')
+    
     {{-- Jumbotron --}}
-    <div class="jumbotron position-relative" style="flex: 1; background: linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%), url('{{ asset('images/bg-1.jpg') }}'); color: #fff; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-        <div>
-            <h1 class="display-4 slogan">PILIHANMU, MASA DEPAN KITA</h1>
-        </div>
-        <div class="box-overflow">
-            <div>
-                <img class="box-content-animate" src="{{ asset('images/Logo.png') }}" alt="Logo" style="width: 200px;" class="mt-3">
+    <section class="container jumbotron">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-4 imageWrapper">
+                <img src="{{ asset('images/cartoon-dump.png') }}" alt="">
             </div>
-            <div class="box-content box-content-animate">
-                <h4 style="margin-bottom: 10px;">Sebagai Mayoritas Pemilih, Kita Memiliki Andil Yang Besar
-                    Untuk Menentukan Masa Depan</h4>
-                <p>Website ini menyediakan informasi seputar isu, dan kandidat Calon Pemimpin yang relevan untuk membuat keputusan di Pemilihan 2024.</p>
+            <div class="col-md-6 title" >
+                <h1>PilihKu, <span> Pilihan Amanmu!</span> </h1>
             </div>
         </div>
-    </div>
+        <div class="row sloganBox justify-content-center align-items-center">
+            <div class="col-md-3 sloganImage">
+                <img src="{{ asset('images/Logo.png') }}" alt="">
+            </div>
+            <div class="col-md-8 sloganText">
+                <h3>Sebagai seorang pemilih, kita memiliki andil yang besar
+                    untuk menentukan masa depan</h3>
+                <p>Website ini menyediakan informasi seputar isu, dan kandidat Calon Pemimpin yang relevan 
+                    untuk membuat keputusan di Pemilihan.</p>
+            </div>
+        </div>
+    </section>
     {{-- End Jumbotron --}}
 
-    {{-- Container rekam jejak --}}
-    <div class="container mb-4 rekam-jejak-wrapper">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="text-center mb-5">
-                    <h1>Rekam Jejak Kandidat</h1>
-                </div>
-                <div class="card rekam-jejak-card">
-                    <div class="card-body p-2">
-                        <p class="m-0">Kandidat Ketua dan Wakil Ketua memainkan peran sentral dalam pemilihan,
-                            sehingga penting untuk memahami latar belakang, dan visi misi mereka.</p>
-                    </div>
-                </div>
-                <div class="text-center mt-5 rounded-pill">
-                    <button class="btn" style="background-color: #FFE500"><a style="text-decoration: none; color: black" href="{{ route('candidate') }}">Lihat Profil Kandidat</a></button>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4 text-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">No 1</h5>
-                                <div class="d-flex justify-content-between">
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">No 2</h5>
-                                <div class="d-flex justify-content-between">
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">No 3</h5>
-                                <div class="d-flex justify-content-between">
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                    <div class="rekam-jejak-imageWrapper">
-                                        <img src="{{ asset('images/person.png') }}" alt="Image 5" class="img-fluid mb-2" style="width: 100%;"> 
-                                        <p>Nama Kandidat</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Quiz Section --}}
-    <div class="quiz-section">
-        <div class="quiz-box">
-            <div class="quiz-images">
-                <div>
-                    <img src="{{ asset('images/person.png') }}" alt="Candidate 1">
-                </div>
-                <div>
-                    <img src="{{ asset('images/person.png') }}" alt="Candidate 2">
-                </div>
-                <div>
-                    <img src="{{ asset('images/person.png') }}" alt="Candidate 3">
-                </div>
-            </div>
-            <div class="quiz-slogan">
-                Quiz CaKetum CaWaKetum 2024
-            </div>
-            <div class="quiz-description">
-                <p class="text-start">Ini adalah kuis CaWaketum. Tujuan kuis adalah untuk memberikan 
-                    rekomendasi berdasarkan kedekatanmu dengan isu-isu yang diusung oleh 
-                    kandidat Calon Ketua dan Calon Wakil Ketua.
-                    Kenali programnya, baru pilih!!!</p>
-            </div>
-            <div class="quiz-button">
-                <button class="btn" style="background-color: #FFE500;">Mulai</button>
-            </div>
-        </div>
-    </div>
-    {{-- End Quiz Section --}}
+    {{-- Organization --}}
 
-    {{-- End Quiz Section --}}
-
-{{-- Candidate Overflow Section --}}
-<div class="container candidate-section">
-    <div class="candidate-overflow-box">
-        <div class="candidate-row">
-            <div class="candidate-card">
-                <h5 class="card-title mb-5">No 1</h5>
-                <div class="candidate-images">
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 1">
-                        <p>Nama Kandidat 1</p>
-                    </div>
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 2">
-                        <p>Nama Kandidat 2</p>
-                    </div>
-                </div>
+    <section class="container organization">
+        <h1 style="text-align: center" class="title">ORGANISASI</h1>
+        <div class="organization-content">
+            <div class="imageWrapper">
+                <img src="{{ asset('images/hmti.png') }}" alt="">
             </div>
-            <div class="candidate-card">
-                <h5 class="card-title mb-5">No 2</h5>
-                <div class="candidate-images">
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 3">
-                        <p>Nama Kandidat 3</p>
-                    </div>
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 4">
-                        <p>Nama Kandidat 4</p>
-                    </div>
-                </div>
-            </div>
-            <div class="candidate-card">
-                <h5 class="card-title mb-5">No 3</h5>
-                <div class="candidate-images">
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 5">
-                        <p>Nama Kandidat 5</p>
-                    </div>
-                    <div class="candidate-image-wrapper">
-                        <img src="{{ asset('images/person.png') }}" alt="Candidate 6">
-                        <p>Nama Kandidat 6</p>
-                    </div>
-                </div>
+            <div class="contentWrapper">
+                <h1 class="organizationName">HMTI</h1>
+                <p id="organizationDescription">Himpunan Mahasiswa Teknik Informatika (HMTI) Universitas Dian Nuswantoro (Udinus) adalah sebuah organisasi mahasiswa yang berkomitmen untuk membangun dan mengembangkan potensi mahasiswa Teknik Informatika. Berdiri sejak tahun [tahun berdiri], HMTI Udinus telah menjadi wadah bagi mahasiswa untuk berinteraksi, belajar, dan berkarya dalam bidang teknologi informasi dan komputer. Sebagai organisasi yang dinamis, HMTI Udinus memiliki berbagai program dan kegiatan yang bertujuan untuk mengembangkan kemampuan akademik dan non-akademik anggotanya. Kegiatan yang rutin diadakan meliputi seminar, workshop, dan pelatihan yang mendalam tentang topik-topik terkini di dunia teknologi, seperti pengembangan perangkat lunak, keamanan siber, kecerdasan buatan, dan teknologi jaringan. Selain itu, HMTI juga aktif dalam mengadakan kompetisi internal dan eksternal, seperti lomba pemrograman, hackathon, dan berbagai event lainnya yang mengasah keterampilan teknis dan kreatif mahasiswa. Selain fokus pada aspek akademik, HMTI Udinus juga sangat memperhatikan pengembangan soft skills anggotanya. Melalui kegiatan-kegiatan seperti team building, outbound, dan kegiatan sosial, HMTI berusaha untuk membentuk karakter mahasiswa yang tangguh, komunikatif, dan memiliki jiwa kepemimpinan yang kuat. Kegiatan sosial yang dilakukan HMTI, seperti bakti sosial dan kampanye lingkungan, juga menunjukkan kepedulian dan kontribusi mereka terhadap masyarakat sekitar.</p>
+                <span class="show-more" id="showMoreButton" data-bs-toggle="modal" data-bs-target="#organizationModal">Selengkapnya</span>
             </div>
         </div>
+    </section>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="organizationModal" tabindex="-1" aria-labelledby="organizationModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="organizationModalLabel">HMTI</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Himpunan Mahasiswa Teknik Informatika (HMTI) Universitas Dian Nuswantoro (Udinus) adalah sebuah organisasi mahasiswa yang berkomitmen untuk membangun dan mengembangkan potensi mahasiswa Teknik Informatika. Berdiri sejak tahun [tahun berdiri], HMTI Udinus telah menjadi wadah bagi mahasiswa untuk berinteraksi, belajar, dan berkarya dalam bidang teknologi informasi dan komputer. Sebagai organisasi yang dinamis, HMTI Udinus memiliki berbagai program dan kegiatan yang bertujuan untuk mengembangkan kemampuan akademik dan non-akademik anggotanya. Kegiatan yang rutin diadakan meliputi seminar, workshop, dan pelatihan yang mendalam tentang topik-topik terkini di dunia teknologi, seperti pengembangan perangkat lunak, keamanan siber, kecerdasan buatan, dan teknologi jaringan. Selain itu, HMTI juga aktif dalam mengadakan kompetisi internal dan eksternal, seperti lomba pemrograman, hackathon, dan berbagai event lainnya yang mengasah keterampilan teknis dan kreatif mahasiswa. Selain fokus pada aspek akademik, HMTI Udinus juga sangat memperhatikan pengembangan soft skills anggotanya. Melalui kegiatan-kegiatan seperti team building, outbound, dan kegiatan sosial, HMTI berusaha untuk membentuk karakter mahasiswa yang tangguh, komunikatif, dan memiliki jiwa kepemimpinan yang kuat. Kegiatan sosial yang dilakukan HMTI, seperti bakti sosial dan kampanye lingkungan, juga menunjukkan kepedulian dan kontribusi mereka terhadap masyarakat sekitar.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="slogan-row">
-        <h2>Beri suaramu untuk memilih 
-            calon Ketua dan Wakil Ketua</h2>
-    </div>
-    <div class="button-row">
-        <button class="btn btn-secondary" style="padding: 10px 80px; font-size: 20px; background-color: #FFE500; border: none; color: black">PILIH !!!</button>
-    </div>
+    
+    {{-- End Organization --}}
+
+    {{-- Rekam Jejak --}}
+    <section class="container rekamJejak">
+        <div class="title">
+            <h1>Pelajari <span>rekam jejak & tanggapan isu </span>kandidat 👀</h1>
+            <p class="desc">Pemilih memainkan peran sentral dalam pemilihan,
+                sehingga penting untuk memahami latar belakang, tanggapan isu, dan visi misi para kandidat.</p>
+            <a href="{{ route('candidate') }}" class="btn">Lihat Profil Kandidat</a>
+            <div class="candidates">
+                @foreach ($candidates as $candidate)
+                <div class="imageWrapper">
+                    <img src="{{ asset($candidate->photo) }}" alt="Candidate {{ $candidate->id }}" class="img-fluid">
+                    <p>{{ $candidate->name }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    {{-- End Rekam Jejak --}}
+
+    {{-- Quiz --}}
+    <section class="container quiz">
+        <div class="title1">
+            <h1>COBA!!!</h1>
+        </div>
+        <div class="title2">
+            <h1>QUIZ KANDIDAT</h1>
+        </div>
+        <h4>Ayo coba quiz untuk mengetahui gagasan kandidat mana yang paling cocok dengan kamu!!!</h4>
+        <a href="" class="btn">Mulai Sekarang</a>
+    </section>
+    {{-- End Quiz --}}
+    
+    {{-- Voting --}}
+    <section class="container voting" style="background-image: url('{{ asset('images/bg-voting.png')}}'); background-size: cover; background-position: center;">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-7 title">
+                <h1>VOTING KANDIDAT PILIHANMU!</h1>
+                <a href="" class="btn">Voting Sekarang</a>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ asset('images/cartoon-1.png') }}" alt="">
+            </div>
+        </div>
+    </section>
+    {{-- End Voting --}}
 </div>
-{{-- End Candidate Overflow Section --}}
 
 @include('components.footer')
-
-
-
-</div>
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 <script src="{{ asset('js/animations.js') }}"></script>
-
 @endsection

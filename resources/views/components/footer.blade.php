@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
 footer {
-    background-color: #005E92;
+    background-color: #2A2A72;
     color: #fff;
     text-align: center;
     padding: 50px 0;

@@ -3,24 +3,29 @@
     width: 50%;
 }
 
-.candidate-wrapper {
-    margin-top: 50px;
-    width: 70%;
-    background-color: #94BBD1;
+.candidate img{
     border-radius: 20px;
+    width: 10em;
 }
 
+.candidate .candidateWrapper{
+    margin-top: 4em;
+    text-align: center;
+}
+.candidate .candidateWrapper h1{
+    margin: 1em 0;
+    font-size: 25px;
+}
 .issues-container {
     margin-top: 100px;
     margin-bottom: 100px;
 }
-
 .issue-wrapper {
     margin-bottom: 20px;
 }
 
 .dropdown-toggle {
-    background-color: #f5e97d;
+    background-color: #f2d09d;
     color: #333;
     padding: 10px;
     border: none;
@@ -31,7 +36,6 @@
 }
 
 .dropdown-toggle::after {
-    /* content: '\25BC'; */
     position: absolute;
     right: 10px;
     top: 50%;
@@ -49,7 +53,7 @@
 }
 
 .dropdown-menu.show {
-    max-height: 1000px; /* Adjust this value based on your maximum expected content height */
+    max-height: 1000px; 
     opacity: 1;
     transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
 }
@@ -66,4 +70,52 @@
     background-color: transparent;
     border: 0;
     appearance: none;
+}
+@media only screen and (min-width: 765px) and (max-width: 991px) {
+    .title {
+        width: 30%;
+    }
+    .candidate img{
+        border-radius: 20px;
+        width: 10em;
+    }
+    .candidate .candidateWrapper{
+        margin-top: 1em;
+        text-align: center;
+    }
+    .candidate .candidateWrapper h1{
+        margin: 1em 0;
+        font-size: 25px;
+    }
+    .issue-wrapper {
+        margin-bottom: 20px;
+    }
+    .issues-container {
+        margin-top: 3em;
+        margin-bottom: 5em;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .title {
+        width: 70%;
+    }
+    .candidate img{
+        border-radius: 20px;
+        width: 10em;
+    }
+    .candidate .candidateWrapper{
+        margin-top: 1em;
+        text-align: center;
+    }
+    .candidate .candidateWrapper h1{
+        margin: 1em 0;
+        font-size: 25px;
+    }
+    .issue-wrapper {
+        margin-bottom: 20px;
+    }
+    .issues-container {
+        margin-top: 5em;
+        margin-bottom: 5em;
+    }
 }

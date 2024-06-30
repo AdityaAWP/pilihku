@@ -1,7 +1,6 @@
 .login-container {
     display: flex;
     height: 100vh;
-    /* margin-top: 80px; */
 }
 
 .login-image {
@@ -12,7 +11,7 @@
 }
 
 .login-form {
-    background-color: #94BBD1;
+    background-color: #383886;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -56,4 +55,55 @@ input[type="password"] {
 
 .login-btn:hover {
     background-color: #0056b3;
+}
+@media only screen and (min-width: 765px) and (max-width: 991px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-image {
+        display: none;
+    }
+  .login-form {
+        height: 100vh;
+        flex: 1;
+        width: 100%;
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .login-btn {
+        max-width: 100%;
+    }
+}
+/* Media Query for Mobile */
+@media only screen and (max-width: 600px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-image {
+        display: none;
+    }
+  .login-form {
+        height: 100vh;
+        flex: 1;
+        width: 100%;
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .login-btn {
+        max-width: 100%;
+    }
 }

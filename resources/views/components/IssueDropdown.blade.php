@@ -15,6 +15,6 @@
         <button type="button" class="close close-dropdown" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <p class="dropdown-item-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste explicabo fuga minus asperiores soluta at perspiciatis ex voluptate repellendus rem sequi in quo aliquid quas labore ad voluptatem, eius, quasi error veniam doloribus! Voluptatem, reprehenderit debitis. Fuga, magnam omnis dolorem natus eaque enim, fugit alias, iste dolores reprehenderit nihil molestias.  {{ $issue }}.</p>
+        <p class="dropdown-item-text">Sebagai seorang calon pemimpin, saya sangat menjunjung tinggi prinsip kesetaraan berpendapat. Kesetaraan berpendapat adalah salah satu fondasi utama dari demokrasi yang sehat dan masyarakat yang inklusif. Setiap individu, tanpa memandang latar belakang, status sosial, atau keyakinan, berhak untuk menyuarakan pandangan dan pendapat mereka. Kesetaraan berpendapat bukan hanya tentang memberikan kesempatan yang sama untuk berbicara, tetapi juga tentang memastikan bahwa setiap suara didengar dan dihargai. Ini berarti menciptakan lingkungan yang aman dan terbuka di mana semua orang merasa nyaman untuk berbicara tanpa takut akan diskriminasi atau pembalasan. {{ $issue }}.</p>
     </div>
 </div>
