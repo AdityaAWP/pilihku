@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // SuperAdminSeeder::class,
+            SuperAdminSeeder::class,
             // VotingSessionsSeeder::class, // Jalankan seeder VotingSessionsTableSeeder
-            CandidateSeeder::class, 
+            // CandidateSeeder::class, 
         ]);
     }
 }
