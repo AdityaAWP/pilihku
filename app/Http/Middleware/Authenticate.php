@@ -3,31 +3,13 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     */
-    protected function redirectTo(Request $request): ?string
-    {
-        $route = route('landing-page');
-        $guards = config('auth.guards', []);
 
-        foreach ($guards as $guard => $config) {
-            if ($guard == "super-admin") {
-                $route = route('super-admin.auth');
-                continue;
-            } else if ($guard == "admin") {
-                $route = route('admin.auth', $request->organization->slug);
-                continue;
-            }
-        }
-
-        return $request->expectsJson() ? null : $route;
-    }
-
+    // Override
     protected function authenticate($request, array $guards)
     {
         if (empty($guards)) {
@@ -52,5 +34,31 @@ class Authenticate extends Middleware
         }
 
         $this->unauthenticated($request, $guards);
+    }
+
+    // Override
+    protected function unauthenticated($request, array $guards)
+    {
+        throw new AuthenticationException(
+            'Unauthenticated.', $guards, $this->customRedirectTo($request, $guards)
+        );
+    }
+
+    private function customRedirectTo(Request $request, array $guards) : string
+    {
+        $route = route('landing-page');
+        $guards = config('auth.guards', []);
+
+        foreach ($guards as $guard => $config) {
+            if ($guard == "super-admin") {
+                $route = route('super-admin.auth');
+                continue;
+            } else if ($guard == "admin") {
+                $route = route('admin.auth', $request->organization->slug);
+                continue;
+            }
+        }
+
+        return $request->expectsJson() ? null : $route;
     }
 }

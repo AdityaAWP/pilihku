@@ -3,63 +3,61 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\StudyCase;
 use Illuminate\Http\Request;
 
 class StudyCaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cases = StudyCase::where('voting_session_id', $request->votingSession->id)->paginate(10);
+        return view('admin.study-cases.index', compact('cases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.study-cases.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'question' => 'required'
+        ]);
+
+        $validatedData['voting_session_id'] = $request->votingSession->id;
+
+        StudyCase::create($validatedData);
+
+        alert()->success('Berhasil', 'Berhasil menambah contoh studi kasus');
+        return redirect()->route('admin.study-cases.index', $request->organization->slug);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function edit(string $organizationSlug, string $id, Request $request)
     {
-        //
+        $case = StudyCase::where('voting_session_id', $request->votingSession->id)->findOrFail($id);
+
+        return view('admin.study-cases.edit', compact('case'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(string $organizationSlug, string $id, Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'question' => 'required'
+        ]);
+
+        StudyCase::findOrFail($id)->update($validatedData);
+
+        alert()->success('Berhasil', 'Berhasil menyimpan contoh studi kasus');
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(string $organizationSlug, string $id)
     {
-        //
-    }
+        StudyCase::findOrFail($id)->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        alert()->success('Berhasil', 'Berhasil menghapus contoh studi kasus');
+        return redirect()->back();
     }
 }

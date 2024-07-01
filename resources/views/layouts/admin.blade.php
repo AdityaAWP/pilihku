@@ -130,10 +130,10 @@
                                 <li class="menu-box">
                                     <ul>
                                         <li class="sidebar-list">
-                                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.dashboard', request()->organization->slug) }}"><i data-feather="users"> </i><span>Dashboard</span></a>
+                                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.dashboard', request()->organization->slug) }}"><i data-feather="home"> </i><span>Dashboard</span></a>
                                         </li>
 
-                                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="clock"></i><span>Sesi Voting</span></a>
+                                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="box"></i><span>Sesi Voting</span></a>
                                             <ul class="sidebar-submenu">
                                                 @php 
                                                     use App\Models\VotingSession;
@@ -154,7 +154,7 @@
                                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.users.index', request()->organization->slug) }}"><i data-feather="users"> </i><span>Anggota</span></a>
                                         </li>
                                         <li class="sidebar-list">
-                                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.organizations.edit', request()->organization->slug) }}"><i data-feather="users"> </i><span>Informasi Organisasi</span></a>
+                                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.organizations.edit', request()->organization->slug) }}"><i data-feather="file-text"> </i><span>Informasi Organisasi</span></a>
                                         </li>
 
                                     </ul>

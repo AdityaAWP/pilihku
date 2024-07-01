@@ -4,62 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Quiz;
 
 class QuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $quizzes = Quiz::where('voting_session_id', $request->votingSession->id)->paginate(10);
+        return view('admin.quizzes.index', compact('quizzes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.quizzes.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'question' => 'required'
+        ]);
+
+        $validatedData['voting_session_id'] = $request->votingSession->id;
+
+        Quiz::create($validatedData);
+
+        alert()->success('Berhasil', 'Berhasil menambah pertanyaan kuis');
+        return redirect()->route('admin.quizzes.index', $request->organization->slug);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function edit(string $organizationSlug, string $id, Request $request)
     {
-        //
+        $quiz = Quiz::where('voting_session_id', $request->votingSession->id)->findOrFail($id);
+
+        return view('admin.quizzes.edit', compact('quiz'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(string $organizationSlug, string $id, Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'question' => 'required'
+        ]);
+
+        Quiz::findOrFail($id)->update($validatedData);
+
+        alert()->success('Berhasil', 'Berhasil menyimpan pertanyaan kuis');
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(string $organizationSlug, string $id)
     {
-        //
-    }
+        Quiz::findOrFail($id)->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        alert()->success('Berhasil', 'Berhasil menghapus pertanyaan kuis');
+        return redirect()->back();
     }
 }
