@@ -46,8 +46,9 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card p-4">
-                <div class="container-countdown">
+            @if (isset($votingSession))
+                <div class="card p-4">
+                    <div class="container-countdown">
                         <h5 id="headline">Countdown</h5>
                         <div id="button-container"></div>
                         <div id="countdown">
@@ -58,8 +59,9 @@
                                 <li><span id="seconds"></span>Seconds</li>
                             </ul>
                         </div>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="card px-4 pt-4">
                 <div class="d-flex justify-content-center my-3">
@@ -80,6 +82,7 @@
 
 @push('script')
     <script>
+        @if (isset($votingSession))
             (function() {
                 const second = 1000,
                     minute = second * 60,
@@ -113,12 +116,13 @@
                         if (distance < 0) {
                             document.getElementById("headline").innerText = "Pemilihan telah dimulai";
                             document.getElementById("button-container").innerHTML = `<a href="{{ route('admin.dashboard', $organization->slug) }}" type="button" class="btn btn-primary mt-3">Cek Hasil</a>`;
-                            
+
                             document.getElementById("countdown").style.display = "none";
                             clearInterval(x);
                         }
                         //seconds
                     }, 0)
             }());
+        @endif
     </script>
 @endpush
