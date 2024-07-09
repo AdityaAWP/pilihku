@@ -243,6 +243,9 @@
     .jumbotron span{
         font-size: 50px; 
     }
+    .sloganImage{
+        max-height: 5em;
+    }
     .jumbotron .sloganBox h3{
         font-size: 20px;
         font-weight: bolder;

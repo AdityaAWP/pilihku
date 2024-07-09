@@ -1,18 +1,20 @@
 <?php
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 require __DIR__ . '/web/super-admin.php';
 require __DIR__ . '/web/admin.php';
 
 Route::get('/', function () {
     $candidates = DB::table('candidates')->get();
-    return view('index',['candidates' => $candidates]);
+    return view('index', ['candidates' => $candidates]);
 })->name('home');
 
-Route::get('/login', function () {
-    return view('pages.login');
-})->name('login');
+// Login Routes
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/voting', function () {
     $candidates = DB::table('candidates')->get();
@@ -25,7 +27,7 @@ Route::get('/face-recognition/{id}', function ($id) {
         abort(404);
     }
     return view('pages.faceRecognition', ['candidate' => $candidate]);
-})->name('face-recognition');
+})->name('face-recognition')->middleware('face-recognition');
 
 Route::get('/candidate', function () {
     $candidates = DB::table('candidates')->get();
@@ -40,6 +42,10 @@ Route::get('/candidate/details/{id}', function ($id) {
     return view('pages.candidateDetails', ['candidate' => $candidate]);
 })->name('candidateDetails');
 
-Route::get('/candidate/issue', function () {
-    return view('pages.issue');
+Route::get('/candidate/issue/{id}', function ($id) {
+    $candidate = DB::table('candidates')->where('id', $id)->first();
+    if (!$candidate) {
+        abort(404);
+    }
+    return view('pages.issue', ['candidate' => $candidate]);
 })->name('issues');

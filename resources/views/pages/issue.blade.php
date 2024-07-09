@@ -3,11 +3,11 @@
 @section('content')
 <link href="{{ asset('css/issue.css') }}" rel="stylesheet">
 @include('components.header')
-<div class="title container text-center"><h2>Tangapan Isu Kandidat Nomor 1</h2></div>
+<div class="title container text-center"><h2>Tangapan Isu Kandidat Nomor {{ $candidate->candidate_no  }}</h2></div>
 <div class="container candidate">
     <div class="candidateWrapper">
         <div class="imageWrapper">
-            <img src="{{ asset('images/Adit.png') }}" alt="">
+            <img src="{{ asset("storage/candidates/".$candidate->photo) }}" alt="">
         </div>
         <h1>Aditya Herdiansyah Putra</h1>
     </div>

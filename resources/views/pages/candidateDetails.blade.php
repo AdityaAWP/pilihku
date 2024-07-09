@@ -16,7 +16,7 @@
 <div class="container details-wrapper">
     <div class="candidatWrapper">
         <div class="imageWrapper">
-            <img src="{{ asset($candidate->photo) }}" alt="{{ $candidate->name }}">
+            <img src="{{ asset("storage/candidates/".$candidate->photo) }}" alt="{{ $candidate->name }}">
         </div>
         <h1>{{ $candidate->name }}</h1>
     </div>
@@ -35,7 +35,7 @@
 {{-- Isu --}}
 <div class="container issue-candidate-wrapper">
     <div class="content">
-        <img src="{{ asset($candidate->photo) }}" alt="{{ $candidate->name }}">
+        <img src="{{ asset("storage/candidates/".$candidate->photo) }}" alt="{{ $candidate->name }}">
         <h3>Pelajari Tanggapan Isu dari Kandidat ini</h3>
         <a href="{{ route('issues', ['id' => $candidate->id]) }}" class="btn" style="background-color: #4e7468; color: white">Pelajari Profile</a>
     </div>

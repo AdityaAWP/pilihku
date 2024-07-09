@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
 
         'organization.exists' => \App\Http\Middleware\OrganizationExists::class,
         'voting_session.exists' => \App\Http\Middleware\VotingSessionExists::class,
+        'face-recognition' => \App\Http\Middleware\FaceRecognitionMiddleware::class,
     ];
 
     /**
