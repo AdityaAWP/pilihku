@@ -15,9 +15,15 @@
             @csrf
             <div class="form-group">
                 <input type="text" name="username" placeholder="Username" required>
+                @error('username')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password" required>
+                @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>

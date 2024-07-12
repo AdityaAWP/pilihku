@@ -76,7 +76,7 @@
             <div class="candidates">
                 @foreach ($candidates as $candidate)
                 <div class="imageWrapper">
-                    <img src="{{ asset($candidate->photo) }}" alt="Candidate {{ $candidate->id }}" class="img-fluid">
+                    <img src="{{ asset("storage/candidates/".$candidate->photo)  }}" alt="Candidate {{ $candidate->id }}" class="img-fluid">
                     <p>{{ $candidate->name }}</p>
                 </div>
                 @endforeach
@@ -103,7 +103,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-md-7 title">
                 <h1>VOTING KANDIDAT PILIHANMU!</h1>
-                <a href="" class="btn">Voting Sekarang</a>
+                <a href="{{ route('voting') }}" class="btn">Voting Sekarang</a>
             </div>
             <div class="col-md-4">
                 <img src="{{ asset('images/cartoon-1.png') }}" alt="">

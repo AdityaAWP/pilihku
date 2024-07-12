@@ -13,7 +13,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">Kandidat {{ $candidate->candidate_no }}</h5>
                     <div class="imageWrapper">
-                        <img src="{{ asset($candidate->photo) }}" class="card-img-top" alt="Kandidat {{ $candidate->candidate_no }}">
+                        <img src="{{ asset("storage/candidates/".$candidate->photo) }}" class="card-img-top" alt="Kandidat {{ $candidate->candidate_no }}">
                     </div>
                     <p class="card-text">{{ $candidate->name }}</p>
                     <a href="{{ route('face-recognition', ['id' => $candidate->id]) }}" class="btn">Voting</a>

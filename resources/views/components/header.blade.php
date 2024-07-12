@@ -14,6 +14,10 @@
         background-color: #4e7468;
     }
 
+    .navbar .btn.logout-btn {
+        background-color: red;
+    }
+
     /* Center nav links in mobile view */
     @media (max-width: 991px) {
         .navbar-collapse {
@@ -54,9 +58,20 @@
                 <li class="nav-item">
                     <a class="nav-link menu-item {{ Request::is('voting') ? 'active' : '' }}" href="{{ route('voting') }}">Voting</a>
                 </li>
+                @auth
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="btn menu-item logout-btn"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+                @endauth
+                @guest
                 <li class="nav-item">
                     <a href="{{ route('login') }}" class="btn menu-item {{ Request::is('login') ? 'active' : '' }}">Login</a>
                 </li>
+                @endguest
             </ul>
         </div>
     </div>

@@ -16,7 +16,7 @@
             <div class="col-md-3" style="border-radius: 10px;">
                 <h4>No {{ $candidate->candidate_no }}</h4>
                 <div class="profile-details">
-                    <img src="{{ asset($candidate->photo) }}" alt="{{ $candidate->name }}">
+                    <img src="{{ asset("storage/candidates/".$candidate->photo) }}" alt="{{ $candidate->name }}">
                     <p>{{ $candidate->name }}</p>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                         <h4>No {{ $candidate->candidate_no }}</h4>
                 </div>
                 <div class="imageWrapper">
-                    <img src="{{ asset($candidate->photo) }}" alt="{{ $candidate->name }}">
+                    <img src="{{ asset("storage/candidates/".$candidate->photo) }}" alt="{{ $candidate->name }}">
                     <p>{{ $candidate->name }}</p>
                 </div>
-                <a href="{{ route('issues') }}" class="btn" style="background-color: #4e7468; color: white; width: 200px; margin: auto">Pelajari</a>
+                <a href="{{ route('issues',['id' => $candidate->id]) }}" class="btn" style="background-color: #4e7468; color: white; width: 200px; margin: auto">Pelajari</a>
             </div>
             @endforeach
         </div>
