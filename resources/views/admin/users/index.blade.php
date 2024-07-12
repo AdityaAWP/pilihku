@@ -82,7 +82,7 @@
                                                 {{-- <li class="me-2"><a href="{{ url('/pegawai/edit-password/'.$du->id) }}" title="Ganti Password"><i class="fa fa-solid fa-key" style="color: rgb(11, 18, 222)"></i></a></li> --}}
 
                                                 
-                                                <li><a href="{{ route('admin.users.face-recognition', ['organizationSlug' => request()->organization->slug, 'user' => $value->id]) }}" title="Face Recognition"><i style="color: black" class="fa fa-solid fa-camera"></i></a></li>
+                                                {{-- <li><a href="{{ route('admin.users.face-recognition', ['organizationSlug' => request()->organization->slug, 'user' => $value->id]) }}" title="Face Recognition"><i style="color: black" class="fa fa-solid fa-camera"></i></a></li> --}}
 
                                                 <li class="delete">
                                                     <form action="{{ route('admin.users.destroy', ['organizationSlug' => request()->organization->slug, 'user' => $value->id]) }}" method="post">

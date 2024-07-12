@@ -28,24 +28,29 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:admins',
+            'username' => 'required|unique:users',
             'password' => 'required|min:8',
-            'profile_photo' => 'image|file|max:10240',
+            'profile_photo' => 'required|image|file|max:10240',
+            'descriptor' => 'required',
         ]);
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['organization_id'] = $request->organization->id;
+        try {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+            $validatedData['organization_id'] = $request->organization->id;
 
-        if ($request->file('profile_photo')) {
-            $fileName = time() . '_' . $request->profile_photo->getClientOriginalName();
-            $request->profile_photo->storeAs('profile_photo', $fileName, 'public');
+            if ($request->file('profile_photo')) {
+                $fileName = time() . '_' . $request->profile_photo->getClientOriginalName();
+                $request->profile_photo->storeAs('profile_photo', $fileName, 'public');
 
-            $validatedData['profile_photo'] = $fileName;
+                $validatedData['profile_photo'] = $fileName;
+            }
+
+            User::create($validatedData);
+
+            alert()->success('Berhasil', 'Anggota berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            alert()->error('Gagal', 'Terjadi kesalahan internal: ' . $th->getMessage());
         }
-
-        User::create($validatedData);
-
-        alert()->success('Berhasil', 'Anggota berhasil ditambahkan');
         return redirect()->route('admin.users.index', $request->organization->slug);
     }
 
@@ -60,7 +65,7 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'username' => 'required|unique:admins,username,' . $id,
+            'username' => 'required|unique:users,username,' . $id,
             'password' => 'nullable|min:8',
             'profile_photo' => 'image|file|max:10240',
         ];
@@ -113,35 +118,34 @@ class UserController extends Controller
     {
         $user = User::where('username', $request['path'])->firstOrFail();
         if (isset($user->face_recognition_photo)) {
-            if (Storage::disk('public')->exists('face_recognition_photo/'.$user->face_recognition_photo)) {
-                Storage::disk('public')->delete('face_recognition_photo/'.$user->face_recognition_photo);
-            }                
+            if (Storage::disk('public')->exists('face_recognition_photo/' . $user->face_recognition_photo)) {
+                Storage::disk('public')->delete('face_recognition_photo/' . $user->face_recognition_photo);
+            }
         }
 
-        $image = $request["image"];
+        $image = $request['image'];
 
-        $image_parts = explode(";base64,", $image);
-    
+        $image_parts = explode(';base64,', $image);
+
         $image_base64 = base64_decode($image_parts[1]);
-        $fileName = $request["path"] . '.png';
-    
-        Storage::put('face_recognition_photo/'.$fileName, $image_base64);
+        $fileName = $request['path'] . '.png';
 
-        $user->update(["face_recognition_photo" => $fileName]);
+        Storage::put('face_recognition_photo/' . $fileName, $image_base64);
+
+        $user->update(['face_recognition_photo' => $fileName]);
         return $user;
     }
 
     public function ajaxDescrip(Request $request)
     {
         $json = file_get_contents('neural.json');
-        if(strlen($json) > 4){
-            $string = ',' . $request["myData"]; 
+        if (strlen($json) > 4) {
+            $string = ',' . $request['myData'];
+        } else {
+            $string = $request['myData'];
         }
-        else{
-            $string = $request["myData"];
-        }
-        $position = strlen($json) - 2; 
-        $out = substr_replace( $json, $string, $position, 0 ); 
+        $position = strlen($json) - 2;
+        $out = substr_replace($json, $string, $position, 0);
         file_put_contents('neural.json', $out);
     }
 }
