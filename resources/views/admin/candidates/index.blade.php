@@ -32,18 +32,26 @@
                         <table class="display" id="mytable">
                             <thead>
                                 <tr>
-                                    <th width="5%" class="text-center">Nomor Kandidat</th>
+                                    <th rowspan="2" class="text-center">Nomor Kandidat</th>
+                                    <th colspan="2">Ketua</th>
+                                    <th colspan="2">Wakil</th>
+                                    <th rowspan="2" width="10%">Actions</th>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Nama</th>
                                     <th width="20%">Foto</th>
                                     <th width="20%">Nama</th>
-                                    <th width="10%">Actions</th>
+                                    <th width="20%">Foto</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($candidates as $value)
                                     <tr>
                                         <td class="text-center">{{ $value->candidate_no }}</td>
-                                        <td><img src="{{ asset("storage/candidates/".$value->photo) }}" alt="profile" style="max-width: 80px; max-height: 80px;"></td>
                                         <td>{{ $value->name }}</td>
+                                        <td><img src="{{ asset("storage/candidates/".$value->photo) }}" alt="profile" style="max-width: 80px; max-height: 80px;"></td>
+                                        <td>{{ $value->name_2 }}</td>
+                                        <td><img src="{{ asset("storage/candidates/".$value->photo_2) }}" alt="profile" style="max-width: 80px; max-height: 80px;"></td>
                                         <td>
                                             <ul class="action"> 
                                                 <li class="me-2 text-primary"><a href="{{ route('admin.candidates.edit', ['organizationSlug' => request()->organization->slug, 'candidate' => $value->id]) }}" title="Detail Kandidat"><i class="icon-id-badge"></i></a></li>

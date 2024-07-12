@@ -27,6 +27,9 @@ class CandidateController extends Controller
             'name' => 'required',
             'photo' => 'required|image|file|max:10240',
             'bio' => 'nullable',
+            'name_2' => 'nullable',
+            'photo_2' => 'nullable|image|file|max:10240',
+            'bio_2' => 'nullable',
             'candidate_no' => 'required|numeric|min:1',
         ]);
 
@@ -41,6 +44,13 @@ class CandidateController extends Controller
 
         $validatedData['photo'] = $fileName;
         $validatedData['voting_session_id'] = $request->votingSession->id;
+
+        if ($request->hasFile('photo_2')) {
+            $fileName2 = time() . '_' . $request->photo_2->getClientOriginalName();
+            $request->photo_2->storeAs('candidates', $fileName2, 'public');
+
+            $validatedData['photo_2'] = $fileName2;
+        }
 
         Candidate::create($validatedData);
 
@@ -69,6 +79,9 @@ class CandidateController extends Controller
             'name' => 'required',
             'photo' => 'nullable|image|file|max:10240',
             'bio' => 'nullable',
+            'name_2' => 'nullable',
+            'photo_2' => 'nullable|image|file|max:10240',
+            'bio_2' => 'nullable',
             'candidate_no' => 'required',
         ]);
 
@@ -84,13 +97,23 @@ class CandidateController extends Controller
         }
 
         if ($request->file('photo')) {
-            if (Storage::disk('public')->exists('candidates/'.$candidate->phoyo)) {
+            if (Storage::disk('public')->exists('candidates/'.$candidate->photo)) {
                 Storage::disk('public')->delete('candidates/'.$candidate->photo);
             }
             $fileName = time() . '_' . $request->photo->getClientOriginalName();
             $request->photo->storeAs('candidates', $fileName, 'public');
 
             $validatedData['photo'] = $fileName;
+        }
+
+        if ($request->file('photo_2')) {
+            if (Storage::disk('public')->exists('candidates/'.$candidate->photo_2)) {
+                Storage::disk('public')->delete('candidates/'.$candidate->photo_2);
+            }
+            $fileName2 = time() . '_' . $request->photo_2->getClientOriginalName();
+            $request->photo_2->storeAs('candidates', $fileName2, 'public');
+
+            $validatedData['photo_2'] = $fileName2;
         }
 
         $candidate->update($validatedData);
@@ -102,6 +125,14 @@ class CandidateController extends Controller
     public function destroy(string $organizationSlug, string $id)
     {
         $candidate = Candidate::findOrFail($id);
+
+        if (Storage::disk('public')->exists('candidates/'.$candidate->photo)) {
+            Storage::disk('public')->delete('candidates/'.$candidate->photo);
+        }
+        if (Storage::disk('public')->exists('candidates/'.$candidate->photo_2)) {
+            Storage::disk('public')->delete('candidates/'.$candidate->photo_2);
+        }
+
         $candidate->delete();
 
         alert()->success('Berhasil', 'Berhasil menghapus kandidat');

@@ -46,7 +46,7 @@ class Authenticate extends Middleware
 
     private function customRedirectTo(Request $request, array $guards) : string
     {
-        $route = route('landing-page');
+        $route = route('home');
         $guards = config('auth.guards', []);
 
         foreach ($guards as $guard => $config) {

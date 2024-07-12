@@ -9,11 +9,5 @@ class Candidate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'voting_session_id',
-        'name',
-        'photo',
-        'bio',
-        'candidate_no',
-    ];
+    protected $guarded = [];
 }
